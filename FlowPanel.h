@@ -12,6 +12,11 @@ class FlowPanel {
         FlowPanel(const FlowPanel& panel);
         ~FlowPanel();
     
+        int getX() const { return dimensions.x; };
+        int getY() const { return dimensions.y; };
+        int getWidth() const { return dimensions.width; };
+        int getHeight() const { return dimensions.height; };
+
         bool addTextArea(TextArea* ta);
         bool addTextArea(TextArea* ta, int index);
         TextArea* getTextArea(const std::string& id) const;

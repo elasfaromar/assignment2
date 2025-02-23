@@ -70,11 +70,3 @@ void TextArea::print() const {
     std::cout << "Size:\t" << dimensions.width << ", " << dimensions.height << std::endl;
     std::cout << "Text:\t" << text << std::endl;
 }
-
-void TextArea::setFill(RGB col) {
-    fill = col;
-}
-
-void TextArea::setBorder(RGB col) {
-    border = col;
-}

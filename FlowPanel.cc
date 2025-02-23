@@ -1,9 +1,9 @@
 #include "FlowPanel.h"
 
-FlowPanel::FlowPanel(int x, int y, int width, int height, const std::string& id, int xgap = 10, int ygap = 10): 
+FlowPanel::FlowPanel(int x, int y, int width, int height, const std::string& id, int xgap, int ygap): 
     dimensions(Rectangle{.x=x, .y=y, .width=width, .height = height}), id(id), xgap(xgap), ygap(ygap), panels(TAArray()) {}
 
-FlowPanel::FlowPanel(Rectangle rect, const std::string& id, int xgap = 10, int ygap = 10): 
+FlowPanel::FlowPanel(Rectangle rect, const std::string& id, int xgap, int ygap): 
     dimensions(rect), id(id), xgap(xgap), ygap(ygap),panels(TAArray())  {}
 
 FlowPanel::FlowPanel(const FlowPanel& panel):

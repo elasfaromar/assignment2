@@ -1,5 +1,6 @@
 #include "RGB.h"
 
+
 RGB::RGB(int r, int g, int b) {
     this->r = validRGB(r);
     this->g = validRGB(g);

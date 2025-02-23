@@ -11,10 +11,10 @@ class TAArray {
         bool add(TextArea* ta);
         bool add(TextArea* ta, int index);
         
-        TextArea* remove(const string& id);
+        TextArea* remove(const std::string& id);
         TextArea* remove(int index);
         
-        TextArea* get(const string& id) const;
+        TextArea* get(const std::string& id) const;
         TextArea* get(int index) const;
         
         bool isFull() const { return count == MAX_COMPONENTS; }

@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 #include "PanelArray.h"
 
 PanelArray::PanelArray(){
@@ -27,7 +24,7 @@ FlowPanel* PanelArray::get(const string& id) const {
             return elements[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 FlowPanel* PanelArray::get(int index) const {
@@ -36,12 +33,13 @@ FlowPanel* PanelArray::get(int index) const {
 }
 
 FlowPanel* PanelArray::remove(const string& number){
-    int index = 0;
-    while (!elements[index]->equals(number) && index < size){
-        ++index;
+    for (int i = 0; i < size; ++i) {
+        if (elements[i]->equals(number)) {
+            return remove(i);
+        }
     }
 
-    return remove(index);
+    return nullptr;
 }
 
 FlowPanel* PanelArray::remove(int index){

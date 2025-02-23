@@ -17,13 +17,15 @@ class TextArea {
         bool overlaps(const TextArea& ta) const;
         void print() const;
 
-        void setFill(RGB col);
-        void setBorder(RGB col);
+        int getWidth() const { return dimensions.width; }
+        int getHeight() const { return dimensions.height; }
 
-        int getWidth() const { dimensions.width; }
-        int getHeight() const { dimensions.height; }
+        void setFill(const RGB& col) { fill = col; };
+        void setBorder(const RGB& col) { border = col; };
+        void setText(const std::string& text) { this->text = text; };
+        void setHeight(int h) { dimensions.height = h; };
 
-        bool equals(const string& id) const;
+        bool equals(const string& id) const { return this->id == id; };
 
     private:
         Rectangle dimensions;

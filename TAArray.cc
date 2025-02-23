@@ -29,7 +29,7 @@ bool TAArray::add(TextArea* ta, int index) {
     return true;
 }
 
-TextArea* TAArray::get(const string& id) const {
+TextArea* TAArray::get(const std::string& id) const {
     for (int i = 0; i < count; i++) {
         if (arr[i]->equals(id)) {
             return arr[i];
@@ -43,13 +43,14 @@ TextArea* TAArray::get(int index) const {
     return arr[index];
 }
 
-TextArea* TAArray::remove(const string& number){
-    int index = 0;
-    while (!arr[index]->equals(number) && index < count){
-        ++index;
+TextArea* TAArray::remove(const std::string& number){
+    for (int i = 0; i < count; ++i) {
+        if (arr[i]->equals(number)) {
+            return remove(i);
+        }
     }
 
-    return remove(index);
+    return nullptr;
 }
 
 TextArea* TAArray::remove(int index){
