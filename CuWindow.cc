@@ -3,16 +3,17 @@
 
 
 CuWindow::CuWindow(string name, int width, int height, RGB background): 
-    name(name), width(width), height(height), background(background), display(XOpenDisplay(nullptr)),
-    window(XCreateSimpleWindow(display,  RootWindow(display, 0), 0, 0, width, height, 0, 0x000000, background.getColour())),
-    graphicsContext(XCreateGC(display, window, 0, NULL)) {
+    name(name), width(width), height(height), background(background), display(XOpenDisplay(nullptr)) {
 
     if (display == NULL){
         cerr<<"Cannot open display"<<endl;
         exit(1);
     }
 
-    XStoreName(display, window, name.std::string::c_str());
+    window = XCreateSimpleWindow(display,  RootWindow(display, 0), 0, 0, width, height,
+                                 0, 0x000000, background.getColour());
+    XStoreName(display, window, name.c_str());
+    graphicsContext = XCreateGC(display, window, 0, NULL);
     XMapWindow(display, window);
     XFlush(display);
     usleep(20000); 
@@ -22,8 +23,6 @@ CuWindow::~CuWindow(){
     XFreeGC(display, graphicsContext);
     XDestroyWindow(display, window);
     XCloseDisplay(display);
-
-    panels.~PanelArray();
 }
 
 

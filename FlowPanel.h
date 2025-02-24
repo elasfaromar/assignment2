@@ -1,7 +1,6 @@
 #ifndef FLOWPANEL_H
 #define FLOWPANEL_H
 
-#include "TextArea.h"
 #include "TAArray.h"
 #include <X11/Xlib.h>
 
@@ -10,8 +9,7 @@ class FlowPanel {
         FlowPanel(int x, int y, int width, int height, const std::string& id, int xgap = 10, int ygap = 10);
         FlowPanel(Rectangle rect, const std::string& id, int xgap, int ygap);
         FlowPanel(const FlowPanel& panel);
-        ~FlowPanel();
-    
+
         int getX() const { return dimensions.x; };
         int getY() const { return dimensions.y; };
         int getWidth() const { return dimensions.width; };
@@ -30,7 +28,7 @@ class FlowPanel {
         void print() const;
         void printTextAreas() const;
 
-        bool equals(const string& id) const { return this->id == id; };
+        bool equals(const std::string& id) const { return this->id == id; };
 
     private:
         std::string id;

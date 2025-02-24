@@ -311,11 +311,11 @@ int TestControl::testTextAreasinFlowPanel(){
 
     cout<<"FlowPanel textAreas test score: "<<score<<"/8"<<endl<<endl;
 
-    // cout<<endl<<"Deleting removed textAreas, test with valgrind and watch for memory errors on exit"<<endl;
+    cout<<endl<<"Deleting removed textAreas, test with valgrind and watch for memory errors on exit"<<endl;
 
-    // delete textAreas[2];
-    // delete textAreas[0];
-    // delete textAreas[5];
+    delete textAreas[2];
+    delete textAreas[0];
+    delete textAreas[5];
 
     return score;
 }
@@ -531,8 +531,11 @@ int TestControl::testWindowMemory(){
     cout<<"Deleting removed FlowPanels, test with valgrind and watch for memory errors on exit"<<endl;
 
     delete panel3;
+    cout<< "p3" << endl;
     delete panel2;
+    cout<< "p2" << endl;
     delete panel4;
+    cout<< "p4" << endl;
 
 
     return 0;

@@ -7,19 +7,15 @@ FlowPanel::FlowPanel(Rectangle rect, const std::string& id, int xgap, int ygap):
     dimensions(rect), id(id), xgap(xgap), ygap(ygap),panels(TAArray())  {}
 
 FlowPanel::FlowPanel(const FlowPanel& panel):
-    dimensions(Rectangle{.x=this->dimensions.x,
-                         .y=this->dimensions.y,
-                         .width=this->dimensions.width,
-                         .height = this->dimensions.height}),
-    id(id), xgap(xgap), ygap(ygap), panels(TAArray()) {
+    dimensions(Rectangle{.x=panel.dimensions.x,
+                         .y=panel.dimensions.y,
+                         .width=panel.dimensions.width,
+                         .height = panel.dimensions.height}),
+    id(panel.id), xgap(panel.xgap), ygap(panel.ygap), panels(TAArray()) {
         for (int i = 0; i < panel.panels.getSize(); ++i) {
             panels.add(new TextArea(*panel.panels.get(i)));
         }
     }
-
-FlowPanel::~FlowPanel() {
-    panels.~TAArray();
-}
 
 
 bool FlowPanel::addTextArea(TextArea* ta) { return panels.add(ta); }

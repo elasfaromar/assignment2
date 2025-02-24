@@ -1,11 +1,16 @@
 #include "TAArray.h"
 
 TAArray::TAArray() {
+    std::cout << "con TAArray" << std::endl;
     arr = new TextArea*[MAX_COMPONENTS];
     count = 0;
 }
 
 TAArray::~TAArray() {
+    std::cout << "des TAArray" << std::endl;
+    for (int i = 0; i < count; i++) {
+        delete arr[i];
+    }
     delete[] arr;
 }
 

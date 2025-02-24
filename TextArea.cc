@@ -10,7 +10,7 @@ TextArea::TextArea():
     dimensions((Rectangle){.x = 0, .y = 0, .width = 25, .height = 25}), id("Default"), text("Default"), fill(RGB::WHITE()), border(RGB::BLACK()) {}
 
 TextArea::TextArea(const TextArea& ta): 
-    dimensions(ta.dimensions), id(ta.id), text("DUPLICATE"), fill(ta.fill), border(ta.border) {}
+    dimensions(ta.dimensions), id(ta.id), text(text), fill(ta.fill), border(ta.border) {}
 
 void TextArea::draw(Display *display, Window win, GC gc, int x, int y) {
     if (!display) return;
