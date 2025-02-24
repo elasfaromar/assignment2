@@ -5,7 +5,6 @@
 #include <X11/Xlib.h>
 
 class FlowPanel {
-    friend class PanelArray;
     public:
         FlowPanel(int x, int y, int width, int height, const std::string& id, int xgap = 10, int ygap = 10);
         FlowPanel(Rectangle rect, const std::string& id, int xgap, int ygap);

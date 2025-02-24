@@ -17,7 +17,6 @@ FlowPanel::FlowPanel(const FlowPanel& panel):
         }
     }
 
-// FlowPanel Destructor
 FlowPanel::~FlowPanel() {
     for (int i = 0; i < areas.getSize(); ++i) {
         delete areas.get(i); 
@@ -42,7 +41,6 @@ bool FlowPanel::overlaps(const FlowPanel& panel) const {
 }
 
 void FlowPanel::draw(Display* display, Window win, GC graphicsContext) {
-    // Draw the FlowPanel as an unfilled rectangle for debugging
     XDrawRectangle(display, win, graphicsContext, dimensions.x, dimensions.y, dimensions.width, dimensions.height);
 
     int currentX = dimensions.x + xgap;
@@ -69,7 +67,6 @@ void FlowPanel::draw(Display* display, Window win, GC graphicsContext) {
             break; // Stop drawing if the next row won't fit
         }
     
-        // Draw the TextArea
         ta->draw(display, win, graphicsContext, currentX, currentY);
     
         // Update rowHeight to track the max height in the current row
