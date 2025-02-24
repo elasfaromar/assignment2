@@ -52,7 +52,7 @@ void TestControl::launch(){
 
 void TestControl::studentTests(){
     cout<<"Student tests"<<endl;
-    cout<<"No tests found"<<endl;
+    //cout<<"No tests found"<<endl;
     // Make a window, try stuff out
     // RGB colour(0, 255, 0);  // change this to your favourite colour
     // CuWindow window("Test", 600, 600, colour);
@@ -64,6 +64,68 @@ void TestControl::studentTests(){
     // at least 2 FlowPanels and 2 TextAreas.
 
     // You can use tester.pressEnterToContinue() to pause the program between configurations
+    RGB colour(0, 255, 0);
+    CuWindow window("Test", 600, 600, colour);
+
+    FlowPanel* panel1  = new FlowPanel(10, 10, 80, 50, "FlowPanel 1");
+    FlowPanel* panel2  = new FlowPanel(10, 50, 80, 50, "FlowPanel 2");
+    FlowPanel* panel3  = new FlowPanel(10, 60, 80, 50, "FlowPanel 3");
+    FlowPanel* panel4  = new FlowPanel(80, 60, 80, 50, "FlowPanel 4");
+    FlowPanel* panel5  = new FlowPanel(100, 60, 80, 50, "FlowPanel 5");
+    FlowPanel* panel6  = new FlowPanel(100, 180, 550, 50, "FlowPanel 6");
+
+    TextArea* textArea1 = new TextArea(10, 10, 50, 30,"ta1", "panel 1");
+    TextArea* textArea2 = new TextArea(10, 50, 50, 30, "ta2", "panel 2");
+    TextArea* textArea3 = new TextArea(10, 60, 50, 30, "ta3", "panel 3");
+    TextArea* textArea4 = new TextArea(80, 60, 50, 30, "ta4", "panel 4");
+    TextArea* textArea5 = new TextArea(100, 60, 50, 30, "ta5", "panel 5");
+    TextArea* textArea6 = new TextArea(100, 180, 50, 30, "ta6", "panel 6");
+
+    if (!panel1->addTextArea(textArea1)) {
+        delete textArea1;
+    }
+    if (!panel1->addTextArea(textArea2)) {
+        delete textArea2;
+    }
+    if (!panel1->addTextArea(textArea3)) {
+        delete textArea3;
+    }
+    if (!panel1->addTextArea(textArea4)) {
+        delete textArea4;
+    }
+    if (!panel1->addTextArea(textArea5)) {
+        delete textArea5;
+    }
+    if (!panel1->addTextArea(textArea6)) {
+        delete textArea6;
+    }
+
+    if (!window.addPanel(panel1)) {
+        delete panel1;
+    }
+    if (!window.addPanel(panel2)) {
+        delete panel2;
+    }
+    if (!window.addPanel(panel3)) {
+        delete panel3;
+    }
+    if (!window.addPanel(panel4)) {
+        delete panel4;
+    }
+    if (!window.addPanel(panel5)) {
+        delete panel5;
+    }
+    if (!window.addPanel(panel6)) {
+        delete panel6;
+    }
+
+    cout<<"CuWindow panels test"<<endl<<endl;
+   
+    window.draw();
+    window.printPanels();
+
+    window.draw();
+
 }
 
 
@@ -463,6 +525,11 @@ int TestControl::testFlowPanelsinWindow(){
 
     cout<<"CuWindow panels test score: "<<score<<"/5"<<endl<<endl;
 
+    delete panel2;
+    delete panel3;
+    delete panel4;
+    delete panel6;
+
     return score;
 }
 
@@ -530,13 +597,9 @@ int TestControl::testWindowMemory(){
 
     cout<<"Deleting removed FlowPanels, test with valgrind and watch for memory errors on exit"<<endl;
 
-    delete panel3;
-    cout<< "p3" << endl;
     delete panel2;
-    cout<< "p2" << endl;
+    delete panel3;
     delete panel4;
-    cout<< "p4" << endl;
-
 
     return 0;
 }

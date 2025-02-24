@@ -5,10 +5,12 @@
 #include <X11/Xlib.h>
 
 class FlowPanel {
+    friend class PanelArray;
     public:
         FlowPanel(int x, int y, int width, int height, const std::string& id, int xgap = 10, int ygap = 10);
         FlowPanel(Rectangle rect, const std::string& id, int xgap, int ygap);
         FlowPanel(const FlowPanel& panel);
+        ~FlowPanel();
 
         int getX() const { return dimensions.x; };
         int getY() const { return dimensions.y; };
@@ -34,7 +36,7 @@ class FlowPanel {
         std::string id;
         int xgap, ygap;
         Rectangle dimensions;
-        TAArray panels;
+        TAArray areas;
 
 };
 

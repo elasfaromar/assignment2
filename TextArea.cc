@@ -10,55 +10,60 @@ TextArea::TextArea():
     dimensions((Rectangle){.x = 0, .y = 0, .width = 25, .height = 25}), id("Default"), text("Default"), fill(RGB::WHITE()), border(RGB::BLACK()) {}
 
 TextArea::TextArea(const TextArea& ta): 
-    dimensions(ta.dimensions), id(ta.id), text(text), fill(ta.fill), border(ta.border) {}
+    dimensions(ta.dimensions), id(ta.id), text(ta.text), fill(ta.fill), border(ta.border) {}
 
 void TextArea::draw(Display *display, Window win, GC gc, int x, int y) {
     if (!display) return;
     
-    // Set the fill color
     XSetForeground(display, gc, fill.getColour());
     XFillRectangle(display, win, gc, x, y, dimensions.width, dimensions.height);
     
-    // Set the border color and draw the border
     XSetForeground(display, gc, border.getColour());
     XDrawRectangle(display, win, gc, x, y, dimensions.width, dimensions.height);
     
-    // Set text color (assuming black for visibility)
     XSetForeground(display, gc, BlackPixel(display, DefaultScreen(display)));
         
+    // Define a fixed letter width (assumed average letter width)
+    int letter_width = 7; 
+    int letter_height = 14;
+    
     // Draw text inside the rectangle
     int text_x = x + 5;  // Padding from the left
     int text_y = y + 15; // Padding from the top
-    int max_width = dimensions.width - 10; // Ensure text stays within bounds
-        
+
+    int max_lines = dimensions.height / letter_height;
+
     // Break text into multiple lines if needed
-    size_t text_length = text.length();
-    size_t line_start = 0;
+    int text_length = text.length();
+    int line_start = 0;
+    int line_count = 0;
+
     while (line_start < text_length) {
-        size_t line_end = line_start;
+        int line_end = line_start;
         int text_width = 0;
+        
+        // Calculate the width of the text one character at a time
         while (line_end < text_length) {
-            XCharStruct text_metrics;
-            int direction, ascent, descent;
-            XTextExtents(XQueryFont(display, XGContextFromGC(gc)), text.substr(line_start, line_end - line_start + 1).c_str(), line_end - line_start + 1, &direction, &ascent, &descent, &text_metrics);
-            text_width = text_metrics.width;
+            text_width = (line_end - line_start + 1) * letter_width;
             
-            if (text_width > max_width) {
+            if (text_width > dimensions.width) {
                 break;
             }
             line_end++;
         }
         
-        if (line_end == line_start) {
+        if (line_end == line_start || line_count >= max_lines) {
             break;
         }
 
         // Draw the substring that fits
         XDrawString(display, win, gc, text_x, text_y, text.substr(line_start, line_end - line_start).c_str(), line_end - line_start);
-        text_y += 15; // Move down for next line
-        line_start = line_end;
+        text_y += letter_height; // Move down for the next line
+        line_count++; // Incement line count
+        line_start = line_end; // Restart counters
     }
-}    
+}
+
 
 bool TextArea::overlaps(const TextArea& ta) const {
     return dimensions.overlaps((Rectangle&)(ta.dimensions));

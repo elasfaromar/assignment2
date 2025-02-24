@@ -1,17 +1,12 @@
 #include "PanelArray.h"
 
 PanelArray::PanelArray(){
-    std::cout << "con PanelArray" << std::endl;
     size = 0;
     elements = new FlowPanel*[MAX_COMPONENTS];
 }
 
 PanelArray::~PanelArray(){
-    std::cout << "des PanelArray" << std::endl;
-    for (int i = 0; i < size; i++) {
-        delete elements[i];
-    }
-    delete [] elements;
+    delete[] elements; 
 }
 
 

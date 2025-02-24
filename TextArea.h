@@ -7,6 +7,8 @@
 using namespace std;
 
 class TextArea {
+    friend class TAArray;
+    friend class FlowPanel;
     public:
         TextArea(int x, int y, int width, int height, std::string id, std::string label, RGB fill = RGB::WHITE(), RGB border = RGB::BLACK());
         TextArea(Rectangle rect, std::string id, std::string label, RGB fill = RGB::WHITE(), RGB border = RGB::BLACK());

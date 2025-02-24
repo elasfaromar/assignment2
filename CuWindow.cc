@@ -3,7 +3,7 @@
 
 
 CuWindow::CuWindow(string name, int width, int height, RGB background): 
-    name(name), width(width), height(height), background(background), display(XOpenDisplay(nullptr)) {
+    name(name), width(width), height(height), background(background), display(XOpenDisplay(nullptr)), panels(PanelArray()) {
 
     if (display == NULL){
         cerr<<"Cannot open display"<<endl;
@@ -16,6 +16,7 @@ CuWindow::CuWindow(string name, int width, int height, RGB background):
     graphicsContext = XCreateGC(display, window, 0, NULL);
     XMapWindow(display, window);
     XFlush(display);
+
     usleep(20000); 
 }
 
@@ -23,6 +24,10 @@ CuWindow::~CuWindow(){
     XFreeGC(display, graphicsContext);
     XDestroyWindow(display, window);
     XCloseDisplay(display);
+
+    for (int i = 0; i < panels.getSize(); ++i) {
+        delete panels.get(i);
+    }
 }
 
 
@@ -37,7 +42,11 @@ bool CuWindow::addPanel(FlowPanel* panel){
         }
     }
 
-    return panels.add(panel);
+    if (panels.add(panel)) {
+        return true;
+    }
+
+    return false;
 }
 
 FlowPanel* CuWindow::removePanel(const std::string& id){
@@ -49,7 +58,6 @@ FlowPanel* CuWindow::getPanel(const std::string& id) const {
 }
 
 void CuWindow::draw(){
-    // draw the window
     usleep(100000);
     XSetForeground(display, graphicsContext, background.getColour());
     XFillRectangle(display, window, graphicsContext, 0, 0, width, height);
@@ -64,7 +72,6 @@ void CuWindow::draw(){
 void CuWindow::print() const {
     cout<<"Window:\t"<< name <<endl;
     cout<<"Flowpanels: "<< panels.getSize() <<endl;
-    
 }
 
 void CuWindow::printPanels() const {

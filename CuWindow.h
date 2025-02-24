@@ -27,7 +27,7 @@ class CuWindow {
         PanelArray panels;
         Display* display;
         Window window;
-        GC graphicsContext;        
+        GC graphicsContext;  
 };
 
 #endif
